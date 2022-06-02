@@ -1,4 +1,4 @@
-package br.com.javacode.models;
+package br.com.javacode.entity;
 
 import java.util.Date;
 import java.util.HashSet;

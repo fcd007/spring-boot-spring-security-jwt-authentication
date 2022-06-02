@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.javacode.models.ERole;
-import br.com.javacode.models.Role;
-import br.com.javacode.models.User;
+import br.com.javacode.entity.ERole;
+import br.com.javacode.entity.Role;
+import br.com.javacode.entity.User;
 import br.com.javacode.payload.request.LoginRequest;
 import br.com.javacode.payload.request.SignupRequest;
 import br.com.javacode.payload.response.JwtResponse;

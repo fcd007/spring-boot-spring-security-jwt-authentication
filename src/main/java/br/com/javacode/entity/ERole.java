@@ -1,4 +1,4 @@
-package br.com.javacode.models;
+package br.com.javacode.entity;
 
 public enum ERole {
   ROLE_USER,
