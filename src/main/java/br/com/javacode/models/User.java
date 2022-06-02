@@ -1,4 +1,4 @@
-package com.bezkoder.springjwt.models;
+package br.com.javacode.models;
 
 import java.util.Date;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package com.bezkoder.springjwt.controllers;
+package br.com.javacode.controllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
