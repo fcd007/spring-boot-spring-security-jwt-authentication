@@ -1,16 +1,17 @@
 package br.com.javacode.enuns;
 
-public enum GeneroEnum {
+public enum FuncionarioStatusEnum {
 
-	H("Homem"), M("Mulher"), O("Outro"), N("Não deseja responder");
+	A("Ativo"), I("Inativo"), P("Pendente");
 
 	private final String nome;
 
-	private GeneroEnum(String nome) {
+	private FuncionarioStatusEnum(String nome) {
 		this.nome = nome;
 	}
 
 	public String getNome() {
 		return nome;
 	}
+
 }

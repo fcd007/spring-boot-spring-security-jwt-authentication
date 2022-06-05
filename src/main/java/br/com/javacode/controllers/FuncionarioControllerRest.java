@@ -22,7 +22,7 @@ import br.com.javacode.entity.Funcionario;
 import br.com.javacode.exception.ResourceNotFoundException;
 import br.com.javacode.repository.FuncionarioRepository;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1")
 public class FuncionarioControllerRest {
@@ -43,8 +43,8 @@ public class FuncionarioControllerRest {
 	}
 
 	// criando uma lista de funcionarios
-	@PostMapping("/funcionarios/listagem")
-	public void salvarAll(@RequestBody FuncionarioDTOListV1<Funcionario> funcionarios) {
+	@PostMapping("/funcionarios/salvar-lista")
+	public void salvarListaAll(@RequestBody FuncionarioDTOListV1<Funcionario> funcionarios) {
 		 List<Funcionario> funcionario = new ArrayList<>();
 		 funcionario = funcionarios.getFuncionarios();
 		 funcionarioRepository.saveAll(funcionario);
@@ -65,7 +65,7 @@ public class FuncionarioControllerRest {
 			@RequestBody Funcionario funcionarioDetalhes) {
 
 		Funcionario funcionario = funcionarioRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Funcionario não existe"));
+				.orElseThrow(() -> new ResourceNotFoundException("Funcionario não pode ser atualizado, funcionário não existe"));
 
 		funcionario.setNome(funcionarioDetalhes.getNome());
 		funcionario.setSobrenome(funcionarioDetalhes.getSobrenome());
@@ -80,7 +80,7 @@ public class FuncionarioControllerRest {
 	@DeleteMapping("funcionarios/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteFuncionario(@PathVariable Long id) {
 		Funcionario funcionario = funcionarioRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Funcionario não encontrado pelo ID"));
+				.orElseThrow(() -> new ResourceNotFoundException("Funcionario não pode ser deletado, funcionario não encontrado pelo ID"));
 
 		funcionarioRepository.delete(funcionario);
 		Map<String, Boolean> response = new HashMap<>();

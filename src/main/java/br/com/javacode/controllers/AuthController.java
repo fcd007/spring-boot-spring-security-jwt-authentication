@@ -1,5 +1,6 @@
 package br.com.javacode.controllers;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -74,6 +75,8 @@ public class AuthController {
 
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+	Date dataCriacaoEntidade = new Date();
+	
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
           .badRequest()
@@ -121,7 +124,13 @@ public class AuthController {
       });
     }
 
-    user.setRoles(roles);
+    if(user != null) {    	
+    	user.setRoles(roles);    
+    	user.setData_criacao(dataCriacaoEntidade);
+    	user.setData_update(dataCriacaoEntidade);
+    	Integer statusInativo = 0;
+    	user.setStatus(statusInativo);
+    }
     userRepository.save(user);
 
     return ResponseEntity.ok(new MessageResponse("Usuário registrado com sucesso!"));
