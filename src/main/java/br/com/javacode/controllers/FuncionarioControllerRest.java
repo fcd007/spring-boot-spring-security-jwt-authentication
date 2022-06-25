@@ -1,6 +1,7 @@
 package br.com.javacode.controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,15 +40,22 @@ public class FuncionarioControllerRest {
 	// criando um novo funcionario
 	@PostMapping("/funcionarios/criar")
 	public Funcionario criarFuncionario(@RequestBody Funcionario funcionario) {
+		Date dataCriacaoEntidade = new Date();
 		return funcionarioRepository.save(funcionario);
 	}
 
 	// criando uma lista de funcionarios
-	@PostMapping("/funcionarios/salvar-lista")
+	@PostMapping("/funcionarios/criar-lista")
 	public void salvarListaAll(@RequestBody FuncionarioDTOListV1<Funcionario> funcionarios) {
-		 List<Funcionario> funcionario = new ArrayList<>();
-		 funcionario = funcionarios.getFuncionarios();
-		 funcionarioRepository.saveAll(funcionario);
+		 List<Funcionario> listaFuncionarios = new ArrayList<>();
+		 Date dataCriacaoEntidade = new Date();
+		 listaFuncionarios = funcionarios.getFuncionarios();
+		 
+		 for (Funcionario funcionario : listaFuncionarios) {
+			
+		}
+		 
+		funcionarioRepository.saveAll(listaFuncionarios);
 	}
 
 	// busca por id do funcionario
@@ -61,9 +69,8 @@ public class FuncionarioControllerRest {
 
 	// update funcionario
 	@PutMapping("/funcionarios/{id}")
-	public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Long id,
-			@RequestBody Funcionario funcionarioDetalhes) {
-
+	public ResponseEntity<Funcionario> updateFuncionario(@PathVariable Long id, @RequestBody Funcionario funcionarioDetalhes) {
+		Date dataUpateEntidade = new Date();
 		Funcionario funcionario = funcionarioRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Funcionario não pode ser atualizado, funcionário não existe"));
 
@@ -81,7 +88,9 @@ public class FuncionarioControllerRest {
 	public ResponseEntity<Map<String, Boolean>> deleteFuncionario(@PathVariable Long id) {
 		Funcionario funcionario = funcionarioRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Funcionario não pode ser deletado, funcionario não encontrado pelo ID"));
-
+		
+		Date dataUpateEntidade = new Date();
+		//para deletar o funcionário - apenas deixamos ele como inativo - I - status
 		funcionarioRepository.delete(funcionario);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("Deletado com sucesso!", Boolean.TRUE);
